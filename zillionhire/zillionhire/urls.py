@@ -94,7 +94,11 @@ urlpatterns = [
     # path('asha_approved_appo', views.asha_approved_appointments, name='asha_approved_appo'),
     # path('approve-appointment/<int:appointment_id>/', views.approve_appointment, name='approve_appointment'),
     path('add_student/', views.add_student, name='add_student'),
-        path('admin_addstudents/', views.admin_addstudents, name='admin_addstudents'),
+    path('admin_addstudents/', views.admin_addstudents, name='admin_addstudents'),
+    path('sdashboard/', views.sdashboard, name='sdashboard'),
+    path('sprofile/', views.sprofile, name='sprofile'),
+    path('srequest/', views.srequest, name='srequest'),
+
 
 ]
 if settings.DEBUG:

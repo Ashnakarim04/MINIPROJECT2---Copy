@@ -66,7 +66,12 @@ def admin_studentadd(request):
     return render(request,'admin/student_add.html')
 def ad_cprofile(request):
     return render(request, 'admin/ad_cprofile.html')
-
+def sdashboard(request):
+    return render(request, 'student/sdashboard.html')
+def sprofile(request):
+    return render(request, 'student/sprofile.html')
+def srequest(request):
+    return render(request, 'student/srequest.html')
 # def addjob(request):
 #     return render(request, 'addjob.html')
 def loginn(request):

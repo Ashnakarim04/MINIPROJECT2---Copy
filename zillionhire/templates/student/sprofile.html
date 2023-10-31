@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets2/img/logo.png' %}">
+        <title>ZillionHire - Company Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'assets2/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets2/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets2/css/select2.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets2/css/bootstrap-datetimepicker.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets2/css/style.css' %}">
+       
+            <script src="{% static 'assets2/js/html5shiv.min.js' %}"></script>
+            <script src="{% static 'assets2/js/respond.min.js' %}"></script>
+            <style>
+              .custom-card {
+                margin-left: 250px; /* Adjust the value as needed */
+              }
+            </style>
+    </head>
+ 
+   
+   
+
+
+
+
+
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container2 {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 20px;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .section h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .section input[type="text"][placeholder="Present Address"],
+        .section input[type="text"][placeholder="Permanent Address"] {
+        width: 80%; /* Adjust the width as needed */
+        height: 80px; /* Adjust the height as needed */
+}
+
+        .edit-profile-button {
+            text-align: center;
+        }
+
+        .edit-profile-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .edit-profile-button a:hover {
+            background-color: #000000;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+       
+        .profile-photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%; /* Add border-radius to make it round */
+            overflow: hidden; /* Hide any overflow outside the border-radius */
+            width: 100px; /* Set a fixed width for the circular container */
+            height: 100px; /* Set a fixed height for the circular container */
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-photo img {
+            width: 100%; /* Make the image fill the circular container */
+            height: 100%; /* Make the image fill the circular container */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
+            border-radius: 50%; /* Ensure the image is round within the circular container */
+        }
+
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .profile-details input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+<body>
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            {% comment %} <a class="navbar-brand" href="{% url 'index' %}"><h2>ZillionHire <em> Website</em></h2></a> {% endcomment %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{% url 'cindex' %}">Home
+                    {% comment %} <span class="sr-only">(current)</span> {% endcomment %}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'aboutuser' %}">About Us</a>
+                </li>
+          
+                <li class="nav-item dropdown">
+                  {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'loggout' %}">Log Out</a>
+                  {% else %}
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
+                
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'loginn' %}">Student</a>
+                      <a class="dropdown-item" href="{% url 'loginn' %}">Company</a>
+                  </div>
+                  {% endif %}
+                </li> 
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contactuser' %}">Contact Us</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'postjob' %}">Post Job</a>
+                  <span class="sr-only">(current)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">Student Dashboard</li>
+                    {% comment %} <li>
+                        <a href="{% url 'index-2' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                    </li> {% endcomment %}
+                    <li class="active">
+                        <a href="{%url 'sprofile' %}"><i class="fa-solid fa-desktop"></i> <span>PROFILE</span></a>
+                    </li>
+                    <li class>
+                        <a href="{%url 'postjob'%}"><i class="fa-solid fa-desktop"></i> <span>JOBS</span></a>
+                    </li>
+                    <li class>
+                      <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>APPLIED CANDIDATES</span></a>
+                    </li>
+                    <li class>
+                      <a href="{%url 'postjob'%}"><i class="fas fa-user-check"></i> <span>CANDIDATE SHORT LIST</span></a>
+                    </li>
+                    <li class>
+                      <a href="{%url 'postjob'%}"><i class="fa-solid fa-award fa-fade"></i></i> <span>SELECTED CANDIDATES</span></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div><br><br><br><br>
+
+    <div class="container2">
+        <h1>STUDENT PROFILE</h1>
+
+        <div class="section">
+            <h2>Basic Information</h2>
+            <div class="profile-photo-container">
+                <div class="profile-photo">
+                    <img src="path/to/profile_photo.jpg" alt="Profile Photo">
+                </div>
+            </div>
+                <div class="section">
+                    &ensp;&ensp;&ensp;<input type="text" placeholder="Admission Number">&ensp;&ensp;&ensp;
+                    <input type="text" placeholder="First Name">&ensp;&ensp;&ensp;
+                    <input type="text" placeholder="Last Name"><br><br>
+                    &ensp;&ensp;&ensp;<input type="text" placeholder="Date of Birth">&ensp;&ensp;&ensp;
+                    <input type="text" placeholder="Gender">&ensp;&ensp;&ensp;
+                    <input type="text" placeholder="Nationality"><br><br>
+                    &ensp;&ensp;&ensp;<input type="text" placeholder="Religion">
+                    <input type="file" placeholder="profile">
+                </div>
+            
+        </div>
+
+        <div class="section">
+            <h2>Contact Information</h2>
+            <input type="text" placeholder="Email">
+            <input type="text" placeholder="Phone"><br><br>
+            <input type="text" placeholder="Present Address"><bR><br>
+            <input type="text" placeholder="Permanent Address">
+        </div>
+
+        <div class="section">
+            <h2>Educational Information</h2>
+            <input type="text" placeholder="Program/Course">
+            <input type="text" placeholder="Department"><br><br>
+            <input type="text" placeholder="Academic Year">
+            <input type="text" placeholder="Current Semester"><br><br>
+            <input type="text" placeholder="CGPA"><br><br>
+            <div class="section">
+                <h4>PREVIOUS EDUCATIONAL INFROMATIONS</h4>
+                <h4>12th</h4>
+                <input type="text" placeholder="Institution">
+                <input type="text" placeholder="CGPA/Percentage">
+                <input type="text" placeholder="Specification">
+                <input type="file" placeholder="upload certificate"><br><br>
+                <h4>10th</h4><br>
+                <input type="text" placeholder="Institution">
+                <input type="text" placeholder="CGPA/Percentage">
+                <input type="text" placeholder="Specification">
+                <input type="file" placeholder="upload certificate"><br><br>
+                <h4>UG(*for MCA)</h4><br>
+                <input type="text" placeholder="Institution">
+                <input type="text" placeholder="CGPA/Percentage">
+                <input type="text" placeholder="Specification">
+                <input type="file" placeholder="upload certificate">
+            </div>
+            
+        </div>
+
+        <div class="section edit-profile-button">
+            <a href="{% url 'srequest' %}">Request Edit</a>
+        </div>
+    </div>
+
+
+
+    
+</body>
+<div class="sidebar-overlay" data-reff=""></div>
+    <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'assets/js/select2.min.js' %}"></script>
+    <script src="{% static 'ssets/js/moment.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+</html>
