@@ -83,18 +83,34 @@
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'loginn' %}">Student</a>
                     <a class="dropdown-item" href="{% url 'loginn' %}">Company</a>
-                    {% comment %} <a class="dropdown-item" href="{% url 'loginn' %}">College Officer</a> {% endcomment %}
-                    {% comment %} <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
-                    <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                    <a class="dropdown-item" href="terms.html">Terms</a> {% endcomment %}
+                    <a class="dropdown-item" href="{% url 'loginn' %}">College Officer</a>
                 </div>
                 {% endif %}
               </li>
-              <li class="nav-item">
+              <li class="nav-item"> 
                 <a class="nav-link" href="{% url 'contactuser' %}">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'postjob' %}">Post Job</a>
+                {% if companyprofile.is_approved %}
+
+                {% if companyprofile.is_approved == 'pending' %}
+                <p class="certification-message"></p>
+                {% else %}
+                <div class="text-content2">
+                  
+                  {% if companyprofile.id %}
+                  <a class="nav-link"id="postjob" href="{% url 'postjob' %}">Post Job</a>
+
+                  {% else %}
+                  <h6>No ID </h6>
+                  {% endif %}
+                </div>              
+                {% endif %}
+              {% else %}
+               <p>Are you </p>      
+              {% endif %}
+
+                {% comment %} <a class="nav-link" href="{% url 'postjob' %}">Post Job</a> {% endcomment %}
               </li>
               
             </ul>
@@ -107,20 +123,45 @@
     <!-- Banner Starts Here -->
     <div class="main-banner header-text" id="top">
         <div class="Modern-Slider">
-          <!-- Item -->
+          <!-- Item --> 
           <div class="item item-1">
             <div class="img-fill">
-                <div class="text-content">
-                  <h6>ZillionHire</h6>
-                  <h4>NexaSphere Institute of Technology</h4>
-                  <p class="indexp1">"Connect, Learn and Grow with Us"</p>
+
+              <div class="text-content">
+                <h6 id="cindex">ZillionHire</h6>
+                <h4>NexaSphere Institute of Technology</h4>
+                <p class="indexp1">"Connect, Learn and Grow with Us"</p>
+                
+              </div>    
+                
+              {% if companyprofile.is_approved %}
+
+                {% if companyprofile.is_approved == 'pending' %}
+                <p class="certification-message"></p>
+                {% else %}
+                <div class="text-content2">
+                  
                   {% if companyprofile.id %}
                   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                   <a href="{% url 'cprofile' companyprofile.id %}" class="filled-button">Go to Profile</a>
+                   <a href="{% url 'cprofile' companyprofile.id %}" id="gotoprofile" class="filled-button">Go to Profile</a>
                   {% else %}
                   <h6>No ID </h6>
                   {% endif %}
-                </div>
+                </div>              
+                {% endif %}
+              {% else %}
+              <div class="text-content">
+                <h6 id="cindex">ZillionHire</h6>
+                <h4>NexaSphere Institute of Technology</h4>
+                <p class="indexp1">"Connect, Learn and Grow with Us"</p>
+                {% if companyprofile.id %}
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                {% else %}
+                <h6>No ID </h6>
+                {% endif %}
+              </div>         
+              {% endif %}
+
             </div>
           </div>
           

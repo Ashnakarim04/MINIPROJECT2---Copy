@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="form-container"> 
   <center><h2 style="color: #a4c639;">EDIT JOB</h2></center>
   <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     {% csrf_token %}
@@ -11,6 +11,26 @@
       <label for="jname">JOB NAME :</label>
       <input type="text" class="form-control" id="jname" name="jname" value="{{ job.jname }}" onkeyup="validateJname()">
       <span id="jnameError" style="color: red;"></span>
+    </div>
+    <div class="form-group">
+      <label for="job_descriptions">ABOUT COMPANY :</label>
+      <input type="text" class="form-control" id="job_descriptions" name="job_descriptions" value="{{ job.job_descriptions }}">
+      
+    </div>
+    <div class="form-groupp">
+      <label for="responsibilities">RESPONSIBILITIES :</label>
+      <input type="text" class="form-controll" id="responsibilities" name="responsibilities" value="{{ job.responsibilities }}">
+      
+    </div>
+    <div class="form-groupp">
+      <label for="preferred_skills">PREFERRED SKILLS :</label>
+      <input type="text" class="form-controll" id="preferred_skills" name="preferred_skills" value="{{ job.preferred_skills }}">
+      
+    </div>
+    <div class="form-groupp">
+      <label for="qualifications">QUALIFICATIONS:</label>
+      <input type="text" class="form-controll" id="qualifications" name="qualifications" value="{{ job.qualifications }}">
+      
     </div>
     <div class="form-group">
       <label for="salary">SALARY :</label>
@@ -34,13 +54,13 @@
       <input type="text" class="form-control" id="link" name="link" value="{{ job.link }}" onkeyup="validateLink()">
       <span id="linkError" style="color: red;"></span>
     </div>
-    <div class="form-group">
+    {% comment %} <div class="form-group">
       <label for="file">CRITERIA : </label>{{ job.criteria }}
       <input type="file" id="criteria" name="criteria" accept="image/*, .pdf" onchange="updateCriteria(event)">
       <span id="fileError" style="color: red;"></span> 
       {% comment %} <input type="file" id="file" name="file" accept="image/*, .pdf" onchange="validateFile()">
       <span id="fileError" style="color: red;"></span>  {% endcomment %}
-    </div>
+    {% comment %} </div>  {% endcomment %}
     
     {% comment %} <div class="form-group">
       <label for="file">Elibility Criteria (img/PDF):</label>
@@ -51,6 +71,18 @@
   </form>
 </div>
 <style>
+  .form-groupp {
+    margin-bottom: 20px; /* Add more margin between form groups */
+}
+
+.form-groupp label {
+    display: block; /* Display labels as block to move them to a new line */
+    margin-bottom: 5px; /* Add space between label and input */
+}
+
+.form-controll {
+    height: 100px; /* Increase the height of the input fields */
+}
   /* Style the form container */
   .form-container {
     max-width: 800px;

@@ -111,7 +111,7 @@
                         <a href="{% url 'addstudents' %}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Student</a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row"> 
                     <div class="col-md-12">
                         <form id="search-form" method="GET" action="{% url 'search_student' %}">
                             <div class="input-group">
@@ -160,7 +160,7 @@
                             </div>
                  
                             <h4 class="doctor-name text-ellipsis"><a href="profile.html">{{ stu.sname }}</a></h4>
-                
+                 
                             <div>
                                 <p class="card-text">EMAIL : {{ stu.email }}</p>
                                 <p class="card-text">PASSWORD : {{ stu.password }}</p>

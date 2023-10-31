@@ -16,6 +16,18 @@
        
             <script src="{% static 'assets2/js/html5shiv.min.js' %}"></script>
             <script src="{% static 'assets2/js/respond.min.js' %}"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+    <!-- Include jQuery UI CSS and JS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+            <script>
+            function displayFileName(input) {
+              const fileName = input.files[0].name;
+              document.getElementById('file-name').textContent = 'File chosen: ' + fileName;
+            }
+          </script>
             <style>
               .custom-card {
                 margin-left: 250px; /* Adjust the value as needed */
@@ -32,6 +44,19 @@
 
     <title></title>
     <style>
+      .file-name {
+        display: inline-block;
+        margin-left: 10px;
+        font-style: italic;
+        color: #333; /* Adjust the color to your preference */
+      }
+      .file-name2 {
+        display: inline-block;
+        margin-left: 10px;
+        font-style: italic;
+        color: #333; /* Adjust the color to your preference */
+      }
+      
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -54,6 +79,22 @@
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
+        }
+        {% comment %} #profile_photo {
+          display: block;
+          margin: 0 auto;
+          width: 150px; /* Adjust the width */
+          height: 150px; /* Adjust the height */
+          border-radius: 50%; /* Make it round */
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow */
+        } {% endcomment %}
+        .circular-image {
+          display: block;
+          margin: 0 auto;
+          width: 150px; /* Adjust the width */
+          height: 150px; /* Adjust the height */
+          border-radius: 50%; /* Make it round */
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow */
         }
 
         .section h2 {
@@ -123,7 +164,61 @@
             padding: 10px;
             margin-bottom: 10px;
         }
-
+        {% comment %} body {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+        } {% endcomment %}
+    
+        .container2 {
+          max-width: 60%;
+          margin: 0 auto;
+        }
+    
+        h1 {
+          text-align: center;
+        }
+    
+        .section {
+          margin-bottom: 20px;
+        }
+    
+        .section h2 {
+          margin-bottom: 10px;
+        }
+    
+        input {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+    
+        input[type="file"] {
+          margin-bottom: 0; /* Remove extra bottom margin for file input */
+        }
+    
+        button {
+          align:center;
+          width: 20%;
+          padding: 10px;
+          border: none;
+          border-radius: 5px;
+          background-color: #4CAF50;
+          color: white;
+          font-size: 16px;
+          cursor: pointer;
+        }
+    
+        button:hover {
+          background-color: #45a049;
+        }
+        .disabled-input {
+          background-color: #f0f0f0;
+          cursor: not-allowed;
+      }
+      
     </style>
 
 <body>
@@ -154,6 +249,7 @@
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'loginn' %}">Student</a>
                       <a class="dropdown-item" href="{% url 'loginn' %}">Company</a>
+                      <a class="dropdown-item" href="{% url 'loginn' %}">College Officer</a>
                   </div>
                   {% endif %}
                 </li> 
@@ -179,92 +275,237 @@
                         <a href="{% url 'index-2' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                     </li> {% endcomment %}
                     <li class="active">
-                        <a href="{%url 'sprofile' %}"><i class="fa-solid fa-desktop"></i> <span>PROFILE</span></a>
+                      <a href="{% url 'sprofile' studentprofile_id=studentprofile.id %}">
+                          <i class="fas fa-id-card"></i>
+                          <span>PROFILE</span>
+                      </a> 
+                  </li>
+                    
+                    <li class>
+                        <a href="{%url 'job_approve' studentprofile_id=studentprofile.id %}"><i class="fa-solid fa-desktop"></i> <span>JOBS</span></a>
+                      </li>
+                    <li class>
+                      <a href="{%url 'sappliedjobs' studentprofile_id=studentprofile.id %}"><i class="fa-solid fa-clipboard-check"></i></i> <span>APPLIED JOBS</span></a>
                     </li>
                     <li class>
-                        <a href="{%url 'postjob'%}"><i class="fa-solid fa-desktop"></i> <span>JOBS</span></a>
+                      <a href="{%url 's_shortlist' studentprofile_id=studentprofile.id %}"><i class="fas fa-user-check"></i> <span>SHORT LISTED JOBS</span></a>
+                    </li>
+                    {% comment %} <li>
+                      <a href="{%url 'postjob'%}"><i class="fa-solid fa-award fa-fade"></i> <span>FIRST ROUND</span></a>
                     </li>
                     <li class>
-                      <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>APPLIED CANDIDATES</span></a>
+                      <a href="{%url 'postjob'%}"><i class="fa-solid fa-award fa-fade"></i></i> <span>SECOND ROUND</span></a>
                     </li>
                     <li class>
-                      <a href="{%url 'postjob'%}"><i class="fas fa-user-check"></i> <span>CANDIDATE SHORT LIST</span></a>
-                    </li>
-                    <li class>
-                      <a href="{%url 'postjob'%}"><i class="fa-solid fa-award fa-fade"></i></i> <span>SELECTED CANDIDATES</span></a>
-                    </li>
+                      <a href="{%url 'postjob'%}"><i class="fa-solid fa-award fa-fade"></i></i> <span>THIRD ROUND</span></a>
+                    </li> {% endcomment %}
                     
                 </ul>
             </div>
         </div>
     </div><br><br><br><br>
 
-    <div class="container2">
-        <h1>STUDENT PROFILE</h1>
 
-        <div class="section">
-            <h2>Basic Information</h2>
-            <div class="profile-photo-container">
-                <div class="profile-photo">
-                    <img src="path/to/profile_photo.jpg" alt="Profile Photo">
-                </div>
-            </div>
+
+  
+
+<bR><br>
+  
+  <div class="container2">
+    <div class="section">
+    <h1>STUDENT DETAILS</h1><br>
+    <div>
+      <form method="POST" enctype="multipart/form-data" id="companyProfileForm">
+        {% csrf_token %}
+        <img src="{% if studentprofile.profile_photo %}{{ studentprofile.profile_photo.url }}{% else %}path_to_default_image{% endif %}" alt="Student Image" class="circular-image" id="profile_photo"><br><br>
+                <label for="Gender">Admission Number</label>  
+                <input type="text" id="admission_no" name="admission_no" placeholder="Admission Number" value="{{ admin_student.admission_no }}"><br><br>
+                <label for="Gender">First Name</label>
+                <input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{ admin_student.user.first_name }}"><br><br>
+                <label for="Gender">Last Name</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{admin_student.user.last_name }}"><br><br>
+                <label for="Gender">Date of Birth</label>
+                <input type="text" id="dob" name="dob" placeholder="YYYY-MM-DD" value="{{ studentprofile.dob|date:'Y-m-d' }}">
+
+                <label for="Gender">Gender</label>
+                <select class="form-control" name="gender" id="gender">
+                    <option value="" disabled selected>-Select-</option>
+                    <option value="Male" {% if studentprofile.gender == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if studentprofile.gender == 'Female' %}selected{% endif %}>Female</option>
+                    <option value="Others" {% if studentprofile.gender == 'Others' %}selected{% endif %}>Others</option>
+                </select><br>
+                <label for="Gender">Nationality</label>
+                <input type="text" id="nationality" name="nationality" placeholder="Nationality" value="{{ studentprofile.nationality }}"><br><br>
+                <label for="Gender">Religion</label>
+                <input type="text" id="religion" name="religion" placeholder="Religion" value="{{ studentprofile.religion }}"><br><br>
+                {% comment %} <input type="file" id="profile_photo" name="profile_photo" value="{{ studentprofile.profile_photo }}" accept=".png, .jpg, .jpeg, .svg" style="width: 70%; padding: 10px; border: 1px solid #a4c639; border-radius: 18px; font-size: 16px;" /> {% endcomment %}
+                <input type="file" id="profile_photo_input" name="profile_photo" accept=".png, .jpg, .jpeg, .svg" onchange="displayFileName(this)">
+                <span id="file-name" class="file-name">No file chosen</span><br><br>
+                
+                          </div>
+      </div>
                 <div class="section">
-                    &ensp;&ensp;&ensp;<input type="text" placeholder="Admission Number">&ensp;&ensp;&ensp;
-                    <input type="text" placeholder="First Name">&ensp;&ensp;&ensp;
-                    <input type="text" placeholder="Last Name"><br><br>
-                    &ensp;&ensp;&ensp;<input type="text" placeholder="Date of Birth">&ensp;&ensp;&ensp;
-                    <input type="text" placeholder="Gender">&ensp;&ensp;&ensp;
-                    <input type="text" placeholder="Nationality"><br><br>
-                    &ensp;&ensp;&ensp;<input type="text" placeholder="Religion">
-                    <input type="file" placeholder="profile">
+                  <h2>Contact Information</h2>
+                  <label for="Gender">Email</label>
+                  <input type="email" id="email" name="email"placeholder="Email" value="{{ admin_student.email }}"required>
+                  <label for="Gender">Contact Number</label>
+                  <input type="tel" id="phone" name="phone"placeholder="Phone" value="{{ admin_student.phone }}" required><br><br>
+                  <label for="Gender">Present Address</label>
+                  <input type="text" id="present_address" name="present_address"placeholder="AddressLine, City, District, State, Country, Pincode " value="{{ studentprofile.present_address }}"required><br><br>
+                  <label for="Gender">Permanent Address</label>
+                  <input type="text" id="permanent_address" name="permanent_address"placeholder="AddressLine, City, District, State, Country, Pincode" value="{{ studentprofile.permanent_address }}"required>
                 </div>
-            
-        </div>
+  
+                <div class="section">
+                  <h2>Educational Information</h2><br>
+                  {% comment %} <input type="text" placeholder="Program/Course"value="{{ studentprofile.phone }}" required>  {% endcomment %}
+                   <label for="Department">Department:</label>
+                 
+                  <select  id="department" name="department" required>
+                    <option value="" disabled selected>-Select-</option>
+                    <option value="B.Tech" {% if studentprofile.department == 'B.Tech' %}selected{% endif %}>B.Tech</option>
+                    <option value="MCA" {% if studentprofile.department == 'MCA' %}selected{% endif %}>MCA</option>
+                </select>
+  
+                  <label for="Program/Course">Program/Course:</label>
+                  <select id="course" name="course" required>
+                    <option value="" disabled selected>-select-</option>
+                    <option value="Electronics and Communication engineering" {% if studentprofile.course == 'Electronics and Communication engineering' %}selected{% endif %}>Electronics and Communication engineering</option>
+                    <option value="Computer Science Engineering" {% if studentprofile.course == 'Computer Science Engineering' %}selected{% endif %}>Computer Science Engineering</option>
+                    <option value="Information Technology" {% if studentprofile.course == 'Information Technology' %}selected{% endif %}>Information Technology</option>
+                    <option value="Integrated MCA" {% if studentprofile.course == 'Integrated MCA' %}selected{% endif %}>Integrated MCA</option>
+                    <option value="Regular MCA" {% if studentprofile.course == 'Regular MCA' %}selected{% endif %}>Regular MCA</option>
+  
+                   
+                  </select><br>
+                  
+                  <label for="Gender">Academic Year</label>
+                  <input type="text" id="academic_year" name="academic_year" placeholder="Academic Year" value="{{ studentprofile.academic_year }}" required>
+                  <div id="academicYearError" class="error-message"></div>
+                  
+                  <label for="Gender">Semester</label>
+                  <input type="text" id="current_semester" name="current_semester"placeholder="Current Semester" value="{{ studentprofile.current_semester }}"required><br><br>
+                  <label for="Gender">CGPA</label>
+                  <input type="text" id="cgpa" name="cgpa" placeholder="CGPA" value="{{ studentprofile.c_cgpa }}"required><br><br>
+                  <label for="Gender">Active Backlogs</label>
+                  <input type="text" id="c_backlog" name="c_backlog" placeholder="Active Backlogs" value="{{ studentprofile.c_backlog }}"><br>
+                  <div id="backlogError" class="error-message"></div>
+                </div>
+                <div class="section">
+                    <center><h4>Previous Educational Informations</h4></center>
 
-        <div class="section">
-            <h2>Contact Information</h2>
-            <input type="text" placeholder="Email">
-            <input type="text" placeholder="Phone"><br><br>
-            <input type="text" placeholder="Present Address"><bR><br>
-            <input type="text" placeholder="Permanent Address">
-        </div>
 
-        <div class="section">
-            <h2>Educational Information</h2>
-            <input type="text" placeholder="Program/Course">
-            <input type="text" placeholder="Department"><br><br>
-            <input type="text" placeholder="Academic Year">
-            <input type="text" placeholder="Current Semester"><br><br>
-            <input type="text" placeholder="CGPA"><br><br>
-            <div class="section">
-                <h4>PREVIOUS EDUCATIONAL INFROMATIONS</h4>
-                <h4>12th</h4>
-                <input type="text" placeholder="Institution">
-                <input type="text" placeholder="CGPA/Percentage">
-                <input type="text" placeholder="Specification">
-                <input type="file" placeholder="upload certificate"><br><br>
-                <h4>10th</h4><br>
-                <input type="text" placeholder="Institution">
-                <input type="text" placeholder="CGPA/Percentage">
-                <input type="text" placeholder="Specification">
-                <input type="file" placeholder="upload certificate"><br><br>
-                <h4>UG(*for MCA)</h4><br>
-                <input type="text" placeholder="Institution">
-                <input type="text" placeholder="CGPA/Percentage">
-                <input type="text" placeholder="Specification">
-                <input type="file" placeholder="upload certificate">
-            </div>
-            
-        </div>
+                    <h4>10th</h4>
+                    <label for="Gender">Institution</label>
+                    <input type="text" id="tenth_institution" name="tenth_institution"placeholder="Institution"value="{{ studentprofile.tenth_institution }}" required>
+                    <label for="Gender">CGPA </label>
+                    <input type="text" id="tenth_cgpa" name="tenth_cgpa"placeholder="CGPA/Percentage"value="{{ studentprofile.tenth_cgpa }}" required>
+                    <label for="Gender">Board of Education</label>
+                    <input type="text" id="tenth_course" name="tenth_course"placeholder="Specification" value="{{ studentprofile.tenth_course }}"required>
+                    {% comment %} <input type="file" id="tenth_certificate_upload" name="tenth_certificate_upload"value="{{ studentprofile.tenth_certificate_upload }}" ><br><br> {% endcomment %}
+                    <label for="Gender">Upload Certificate</label>
+                    <input type="file" id="tenth_certificate_upload" name="tenth_certificate_upload" >
+                    <span id="file-name" class="file-name">No file chosen</span><br><br>
 
-        <div class="section edit-profile-button">
-            <a href="{% url 'srequest' %}">Request Edit</a>
-        </div>
+
+                    <h4>12th</h4><br>
+                    <label for="Gender">Institution</label>
+                    <input type="text" id="twelfth_institution" name="twelfth_institution" placeholder="Institution" value="{{ studentprofile.twelfth_institution }}"required>
+                    <label for="Gender">CGPA</label>
+                    <input type="text"id="twelfth_cgpa" name="twelfth_cgpa" placeholder="CGPA/Percentage" value="{{ studentprofile.twelfth_cgpa }}"required>
+                    <label for="Gender">Board of Education</label>
+                    <input type="text"id="twelfth_course" name="twelfth_course" placeholder="Specification" value="{{ studentprofile.twelfth_course }}"required>
+                    {% comment %} <input type="file"id="twelfth_certificate_upload" name="twelfth_certificate_upload" placeholder="Upload Certificate"value="{{ studentprofile.twelfth_certificate_upload }}" ><br><br> {% endcomment %}
+                    {% comment %} <input type="file" id="twelfth_certificate_upload" name="twelfth_certificate_upload">
+                    <span id="file-name2"></span><br><br> {% endcomment %}
+                    <label for="Gender">Upload Certificate</label>
+                    <input type="file" id="twelfth_certificate_upload" name="twelfth_certificate_upload" onchange="updateFileName(this)">
+                    <span id="file-name2" class="file-name2">No file chosen</span><br><br>
+
+
+
+
+                    
+
+
+  
+                   
+                    <h4>UG(*for MCA)</h4><br>
+                    <label for="Gender">Institution</label>
+                    <input type="text"id="ug_institution" name="ug_institution" placeholder="Institution" value="{{ studentprofile.ug_institution }}">
+                    <label for="Gender">CGPA</label>
+                    <input type="text" id="ug_cgpa" name="ug_cgpa"placeholder="CGPA/Percentage" value="{{ studentprofile.ug_cgpa }}">
+                    <label for="Gender">University</label>
+                    <input type="text"id="ug_course" name="ug_course" placeholder="Specification" value="{{ studentprofile.ug_course }}">
+                    {% comment %} <input type="file"id="ug_certificate_upload" name="ug_certificate_upload" placeholder="Upload Certificate" value="{{ studentprofile.ug_certificate_upload}}"><br><br> {% endcomment %}
+                    <label for="Gender">Upload Certificate</label>
+                    <input type="file" id="ug_certificate_upload" name="ug_certificate_upload" >
+                    <span id="file-name" class="file-name">No file chosen</span><br><br>
+
+
+                    <div class="section">
+                      <label for="address" id="carde" class="form-label text animated zoomIn">Reset Password:</label>
+                      <hr class=" text animated zoomIn" id="signintext2">
+                      <input type="Password" class="form-control text animated zoomIn"  id="cardelement" name="old_password" placeholder="current password">
+                      <input type="Password" class="form-control text animated zoomIn"  id="cardelement" name="reset_password" style="margin-top:20px;" placeholder="new password">
+                      <input type="Password" class="form-control text animated zoomIn"  id="cardelement" name="cpass" style="margin-top:20px;" placeholder="confirm new password">
+                      <span id="pspan" class="text-danger" style="margin-left:50%;"></span>
+                  </div>
+                  {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger" style="margin-left:">{{ message }}</p>
+                            {% endfor %}
+                    {% endif %}
+
+                    
+                    <center><button type="submit" id="save-button">Save</button></center>&ensp;
+                    <div class="section edit-profile-button">
+                      <a href="{% url 'srequest' %}">Request Edit</a>
+                  </div>
+
+                </div>
+
+              </form>
+          </div>
+          
+  
+          
+  
+        
     </div>
+  </div>
+  
+
+  
+  
+  
+
+</body>
+</html>
+
+        {% comment %} <div class="section edit-profile-button">
+            <a href="{% url 'srequest' %}">Request Edit</a>
+        </div> {% endcomment %}
+    </div> 
 
 
-
+    <script>
+      const academicYearInput = document.getElementById('academic_year');
+      const academicYearError = document.getElementById('academicYearError');
+    
+      academicYearInput.addEventListener('keyup', function() {
+        const academicYearValue = academicYearInput.value;
+        const validInputRegex = /^[0-9-]+$/;  // Allow numbers and hyphens
+    
+        if (!validInputRegex.test(academicYearValue)) {
+          academicYearError.textContent = 'Please enter numeric values and hyphens only.';
+        } else {
+          academicYearError.textContent = '';
+        }
+      });
+    </script>
+    
+    
     
 </body>
 <div class="sidebar-overlay" data-reff=""></div>
@@ -276,5 +517,148 @@
     <script src="{% static 'ssets/js/moment.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap-datetimepicker.min.js' %}"></script>
     <script src="{% static 'assets/js/app.js' %}"></script>
+    <script>
+      function displayFileName(input) {
+        const fileName = input.files[0].name;
+        document.getElementById('file-name').textContent = 'File chosen: ' + fileName;
+      
+        // Save the file name to localStorage
+        localStorage.setItem('selectedFileName', fileName);
+      }
+      window.onload = function() {
+        const savedFileName = localStorage.getItem('selectedFileName');
+        if (savedFileName) {
+          document.getElementById('file-name').textContent = 'File chosen: ' + savedFileName;
+        }
+      }
+      document.getElementById('StudentProfile').addEventListener('submit', function() {
+        localStorage.removeItem('selectedFileName');
+      });
+
+     
+
+      function updateFileName(input) {
+        const fileName = input.files[0].name;
+        document.getElementById('file-name').textContent = 'File chosen: ' + fileName;
+      
+        // Save the file name to localStorage
+        localStorage.setItem('twelfthFileName', fileName);
+      }
+      
+      window.onload = function() {
+        const twelfthFileName = localStorage.getItem('twelfthFileName');
+        if (twelfthFileName) {
+          document.getElementById('file-name').textContent = 'File chosen: ' + twelfthFileName;
+        }
+      }
+      
+
+  
+        $(document).ready(function() {
+            $('#dob').datepicker({
+                dateFormat: 'yy-mm-dd',  // Set the desired date format
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0"  // Allow selection of years from 100 years ago to the current year
+            });
+        });
+
+
+    
+          const academicYearInput = document.getElementById('academic_year');
+          const academicYearError = document.getElementById('academicYearError');
+        
+          academicYearInput.addEventListener('keyup', function() {
+            const academicYearValue = academicYearInput.value;
+        
+            // Regular expression to match numeric values only
+            const numericRegex = /^[0-9]+$/;
+        
+            if (!numericRegex.test(academicYearValue)) {
+              academicYearError.textContent = 'Please enter numeric values only.';
+            } else {
+              academicYearError.textContent = ''; // Clear the error message if valid
+            }
+          });
+
+
+          const backlogInput = document.getElementById('c_backlog');
+          const backlogError = document.getElementById('backlogError');
+        
+          backlogInput.addEventListener('input', validateBacklog);
+        
+          function validateBacklog() {
+            const backlogValue = backlogInput.value;
+        
+            if (!/^\d+$/.test(backlogValue) || parseInt(backlogValue) > 25) {
+              backlogError.textContent = 'Please enter a valid number (0-25).';
+            } else {
+              backlogError.textContent = '';
+            }
+          }
+      
+          const cgpaInput = document.getElementById('cgpa');
+          const tenthCgpaInput = document.getElementById('tenth_cgpa');
+          const twelfthCgpaInput = document.getElementById('twelfth_cgpa');
+          const ugCgpaInput = document.getElementById('ug_cgpa');
+        
+          const numericDotPattern = /^\d*\.?\d*$/;
+        
+          cgpaInput.addEventListener('keyup', validateCgpa);
+          tenthCgpaInput.addEventListener('keyup', validateCgpa);
+          twelfthCgpaInput.addEventListener('keyup', validateCgpa);
+          ugCgpaInput.addEventListener('keyup', validateCgpa);
+        
+          function validateCgpa() {
+            const inputValue = this.value;
+        
+            if (!numericDotPattern.test(inputValue) || parseFloat(inputValue) > 10) {
+              this.setCustomValidity('Please enter a valid CGPA (0-10).');
+            } else {
+              this.setCustomValidity('');
+            }
+          }
+      
+      
+      
+      
+      
+            
+      // Check if the fields were previously disabled
+      {% comment %} var areFieldsDisabled = localStorage.getItem('fieldsDisabled');
+      if (areFieldsDisabled === 'true') {
+          disableFields();
+      }
+  
+      document.getElementById("companyProfileForm").addEventListener("submit", function(event) {
+          // Prevent the default form submission behavior
+          event.preventDefault();
+  
+          // Disable all input fields and select elements after form submission
+          disableFields();
+  
+          // Store a flag indicating that the fields are disabled
+          localStorage.setItem('fieldsDisabled', 'true');
+      });
+  
+      function disableFields() {
+          var inputs = document.querySelectorAll("input");
+          inputs.forEach(function(input) {
+              input.disabled = true;
+              input.classList.add("disabled-input");
+          });
+  
+          var selects = document.querySelectorAll("select");
+          selects.forEach(function(select) {
+              select.disabled = true;
+              select.classList.add("disabled-input");
+          });
+  
+          // Disable the submit button after form submission
+          document.getElementById("save-button").disabled = true;
+          document.getElementById("save-button").classList.add("disabled-input");
+      } {% endcomment %}
+  </script>
+  
 
 </html>

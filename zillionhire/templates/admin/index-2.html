@@ -19,6 +19,13 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+    <style>
+        /* Add this to your CSS file or style section */
+        .red-bg {
+            background-color: #f7d0d0;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -76,26 +83,45 @@
                         <li class="active">
                             <a href="{% url 'admin_index2' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-						<li>
+						{% comment %} <li>
                             <a href="{% url 'admin_poststudent' %}"><i class="fa-solid fa-user-graduate"></i> <span>Students</span></a>
+                        </li> {% endcomment %}
+                        <li>
+                            <a href="{% url 'ad_studentlist' %}"><i class="fa-solid fa-award"></i> <span> Students List</span></a>
                         </li>
+                        <li id="studentindex">
+                            <a href="{% url 'admin_addstudents' %}"><i class="fa-solid fa-award"></i> <span>Add student</span></a>
+                        </li>
+                        
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-user-tie"></i> <span> Company </span> <span class="menu-arrow"></span></a>
+                            <a href="#"><i class="fas fa-user-tie"></i> <span> Company </span> <span id="menuarrow"class="menu-arrow"></span></a>
                             <ul style="display: none;">
-                                <li><a href="{% url 'companyprofilelist' %}">Company List</a></li>
+                                <li><a href="{% url 'companyapprove' %}">Approve Company</a></li>
+                                <li><a id="companyprofilelist" href="{% url 'companyprofilelist' %}">Company List</a></li>
                                 <li><a href="{% url 'jobslist' %}">Jobs</a></li>
-                                <li><a href="{% url 'admin_company' %}">Applied Students</a></li>
-                                <li><a href="{% url 'admin_company' %}">Short Listed Students</a></li>
+                                {% comment %} <li><a href="{% url 'admin_company' %}">Applied Students</a></li>
+                                <li><a href="{% url 'admin_company' %}">Short Listed Students</a></li> {% endcomment %}
                                 
                             </ul>
                         </li>
                         <li>
-                            <a href="{% url 'admin_poststudent' %}"><i class="fa-solid fa-award"></i> <span>Selected Students</span></a>
+                            <a href="{% url 'adminappstudents' %}"><i class="fa-solid fa-user-check"></i> <span>Applied Students</span></a>
                         </li>
                         <li>
-                            <a href="{% url 'admin_addstudents' %}"><i class="fa-solid fa-award"></i> <span>Add student</span></a>
+                            <a href="{% url 'adminappstudents' %}"><i class="fa-solid fa-award"></i> <span>Short Listed Students</span></a>
                         </li>
                         
+                        {% comment %} <li class="submenu">
+                            <a href="#"><i class="fas fa-user-tie"></i> <span> Selected Candidates </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="{% url 'companyapprove' %}">First Round</a></li>
+                                <li><a href="{% url 'companyprofilelist' %}">Second Round</a></li>
+                                <li><a href="{% url 'jobslist' %}">Third Round</a></li>
+                                <li><a href="{% url 'admin_company' %}">Fourth Round</a></li>
+                                
+                                
+                            </ul>
+                        </li> {% endcomment %}
                         
                     </ul>
                 </div>
@@ -118,10 +144,12 @@
                             <span class="dash-widget-bg2"><i class="fas fa-user-tie"></i></span>
                             <div class="dash-widget-info text-right">
                                 <h3>{{ comp_count }}</h3>
-                                <span class="widget-title2">Company <i class="fa fa-check" aria-hidden="true"></i></span>
+                                <span class="widget-title2">Approved Company <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
+                   
+                    
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="dash-widget">
                             <span class="dash-widget-bg3"><i class="fa fa-handshake-o" aria-hidden="true"></i></span>
@@ -131,15 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    {% comment %} <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <div class="dash-widget">
-                            <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
-                            <div class="dash-widget-info text-right">
-                                <h3>618</h3>
-                                <span class="widget-title4">Blood Bank staffs<i class="fa fa-check" aria-hidden="true"></i></span>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
+                   
                 </div>
 				<div class="row">
 					<div class="col-12 col-md-6 col-lg-6 col-xl-6">

@@ -28,6 +28,7 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     # path('', sample, name=''),
     path('',views.index, name="index"),
     path('jobs',views.jobs, name="jobs"),
@@ -37,16 +38,19 @@ urlpatterns = [
     path('sample2', sample2, name='sample2'),
     path('studentloginn', studentloginn, name='studentloginn'),
     path('loginn', loginn, name='loginn'),
-    path('reg', reg, name='reg'),
+    path('reg', reg, name='reg'), 
     path('loggout', loggout, name='loggout'),
     path('cindex', cindex, name='cindex'),
     path('aboutuser', aboutuser, name='aboutuser'),
     path('contactuser', contactuser, name='contactuser'),
     path('cprofile/<int:companyprofile_id>/', cprofile, name='cprofile'),
+    path('cprofile/<int:user_id>/', views.approve_comp, name='approve_comp'),
+    path('approve_comp/<int:company_id>/', views.approve_comp, name='approve_comp'),
     # path('postjob/<int:companyprofile_id>/', postjob, name='postjob'),
     path('cjob', cjob, name='cjob'),
     path('postjob/', views.postjob, name='postjob'),
     path('addjob', addjob, name='addjob'),
+    # path('addjob/<int:obj_id>/', views.addjob, name='addjob'),
     path('sindex', sindex, name='sindex'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
@@ -72,19 +76,22 @@ urlpatterns = [
     path('companyprofilelist',companyprofilelist,name='companyprofilelist'),
     path('search_company', search_company, name='search_company'),
     path('search_job', search_job, name='search_job'),
+    # path('search_jobs/', views.search_jobs, name='search_jobs'),
     path('adsearch_company', adsearch_company, name='adsearch_company'),
     path('delete_company', views.delete_company, name='delete_company'),
     path('ad_deletecompany/<int:comp_id>/', views.ad_deletecompany, name='ad_deletecompany'),
 
     path('search_student', search_student, name='search_student'),
+    path('search_student2', views.search_student2, name='search_student2'),
     # path('edit_student',edit_student,name='edit_student'),
     path('edit-student/<int:student_id>/', views.edit_student, name='edit_student'),
-
+    path('ad_studentlist', views.ad_studentlist, name='ad_studentlist'),
     # path('edit-student/<int:student_id>/', views.edit_student, name='edit_student'),
     path('delete-student/<int:student_id>/', views.delete_student, name='delete_student'),
     path('download_criteria/<int:job_id>/', download_criteria.as_view(), name='download_criteria'),
     path('generate_pdf/', views.generate_pdf, name='generate_pdf'),
      
+    path('companyapprove',views.companyapprove, name='companyapprove'),
     path('search_course',search_course, name='search_course'),
     path('profc',views.profc, name='profc'),
     path('search_course',search_course, name='search_course'),
@@ -95,11 +102,31 @@ urlpatterns = [
     # path('approve-appointment/<int:appointment_id>/', views.approve_appointment, name='approve_appointment'),
     path('add_student/', views.add_student, name='add_student'),
     path('admin_addstudents/', views.admin_addstudents, name='admin_addstudents'),
-    path('sdashboard/', views.sdashboard, name='sdashboard'),
-    path('sprofile/', views.sprofile, name='sprofile'),
+    # path('sdashboard/', views.sdashboard, name='sdashboard'),
+    path('sprofile/<int:studentprofile_id>/', views.sprofile, name='sprofile'),
+    path('jobapply/<int:jobapply_id>/', views.jobapply, name='jobapply'),
+
+    # path('sprofile/', views.sprofile, name='sprofile'),
+    # path('sprofile/<int:studentprofile_id>/', views.sprofile, name='sprofile'),
+    path('cindex/', views.cindex, name='cindex'),
     path('srequest/', views.srequest, name='srequest'),
+    path('adpostjob/', views.adpostjob, name='adpostjob'),
+    path('job_approve/<int:studentprofile_id>/', views.job_approve, name='job_approve'),
 
 
+    path('approved_jobs/<int:job_id>/', views.approved_jobs, name='approved_jobs'),
+    path('eligibility', views.eligibility, name='eligibility'),
+
+    path('appliedstudents', views.appliedstudents, name='appliedstudents'),
+    path('adminappstudents', views.adminappstudents, name='adminappstudents'),
+    path('sappliedjobs/<int:studentprofile_id>/', views.sappliedjobs, name='sappliedjobs'),
+    path('s_shortlist/<int:studentprofile_id>/', views.s_shortlist, name='s_shortlist'),
+    path('cfirstround', views.cfirstround, name='cfirstround'),
+    path('admin_shortlist', views.admin_shortlist, name='admin_shortlist'),
+    path('studentprofileapp/<int:studentprofile_id>/', views.studentprofileapp, name='studentprofileapp'), 
+    path('reject_shortlist/<int:application_id>/', views.reject_shortlist, name='reject_shortlist'),
+    path('approve_shortlist/<int:application_id>/', views.approve_shortlist, name='approve_shortlist'),
+   
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

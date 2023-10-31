@@ -80,11 +80,17 @@
                         {% comment %} <li>
                             <a href="{% url 'index-2' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li> {% endcomment %}
-                        <li class="active">
-                            <a href="{%url 'sprofile' %}"><i class="fa-solid fa-desktop"></i> <span>PROFILE</span></a>
+                        <li class="{% if request.path == 'sprofile/' and studentprofile.id %}active{% endif %}">
+                          <a href="{% if studentprofile.id %}{% url 'sprofile' studentprofile.id %}{% else %}#{% endif %}">
+                              <i class="fa-solid fa-desktop"></i> <span>PROFILE</span>
+                          </a>
                         </li>
+                      
+                      
+                      
+                      
                         <li class>
-                            <a href="{%url 'postjob'%}"><i class="fa-solid fa-desktop"></i> <span>JOBS</span></a>
+                            <a href="{%url 'job_approve'%}"><i class="fa-solid fa-desktop"></i> <span>JOBS</span></a>
                         </li>
                         <li class>
                           <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>APPLIED CANDIDATES</span></a>
@@ -100,7 +106,7 @@
                 </div>
             </div>
         </div>
-        <div class="page-wrapper">
+        {% comment %} <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
@@ -111,7 +117,7 @@
                       </div>
                 </div>
               </div>
-          </div>
+          </div> {% endcomment %}
 
 
 <div class="row">

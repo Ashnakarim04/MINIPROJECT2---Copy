@@ -90,16 +90,13 @@
                 <br><br>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        {% comment %} <form method="POST" action="" autocomplete="off"> {% endcomment %}
-                            <form method="post" enctype="multipart/form-data">
-                                <!-- Your form fields including the image upload field -->
+                        <form method="POST" action="" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Company Name <span class="text-danger">*</span></label>
-                                        <input class="form-control" id="cname" name="cname" type="text" onkeyup="">
-                                        {% comment %} <span id="cnameError" class="text-danger"></span> {% endcomment %}
+                                        <input class="form-control" id="cname" name="cname" type="text" value="{{ user.companyprofile.email }}" onkeyup="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -123,19 +120,13 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    {% comment %} <div class="form-group">
-                                        <label>Application Start Date</label>
-                                        <div class="cal-icon">
-                                            <input type="text" id="sdate" name="sdate" class="form-control datetimepicker">
-                                        </div>
-                                    </div> {% endcomment %}
                                     <div class="form-group">
                                         <label>Application Start Date <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
                                             <input type="text" id="sdate" name="sdate" class="form-control datetimepicker" onblur="validateStartDate()">
                                             <span id="sdateError" class="text-danger"></span>
                                         </div>
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -153,12 +144,11 @@
                                         <span id="linkError" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                {% comment %} <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>PDF/img</label>
                                         <div class="profile-upload">
                                             <div class="upload-img">
-                                                {% comment %} <img alt="" src="{% static 'assets2/img/user.jpg' %}"> {% endcomment %}
                                                 <i class="fa fa-upload" style="font-size: 28px; color: #a4c639"></i>
                                             </div>
                                             <div class="upload-input">
@@ -166,26 +156,84 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div> {% endcomment %}
+                                <!-- Job Description -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Job Description <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="job_description" name="job_description" rows="5" placeholder="Enter job description..."></textarea>
+                                        <small class="form-text text-muted">Separate responsibilities with line breaks.</small>
+                                    </div>
+                                    {% comment %} <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="bullet_point_checkbox" onclick="toggleBulletPoints()">
+                                        <label class="form-check-label" for="bullet_point_checkbox">Enable Bullet Points</label>
+                                    </div> {% endcomment %}
+                                </div>
+                                
+                                
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Responsibilities <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="responsibilities" name="responsibilities" rows="5" required></textarea>
+                                        <small class="form-text text-muted">Separate responsibilities with line breaks.</small>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Preferred Skills <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="preferred_skills" name="preferred_skills" rows="5"></textarea>
+                                        <small class="form-text text-muted">Separate preferred skills with line breaks.</small>
+                                    </div>
+                                </div>
+                                <!-- Qualifications -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Qualifications <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="qualifications" name="qualifications" rows="5"></textarea>
+                                        <small class="form-text text-muted">Separate qualifications with line breaks.</small>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Required 10th CGPA</label>
+                                        <input class="form-control" name="required_tenth_cgpa" type="number">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Required 12th CGPA</label>
+                                        <input class="form-control" name="required_twelfth_cgpa" type="number" >
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Required Current CGPA</label>
+                                        <input class="form-control" name="required_current_cgpa" type="number">
+                                    </div> 
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Backlogs</label>
+                                        <input class="form-control" name="required_backlog" type="number" >
+                                    </div>
                                 </div>
                             </div>
-                        
-                            <div>
-                                <div class="m-t-20 text-center">
-                                    <button class="btn btn-primary submit-btn">Post Job</button>
-                                </div>
+                            {% comment %} <div class="m-t-20 text-center"> {% endcomment %}
+                                {% comment %} <button class="btn btn-primary submit-btn">Post Job</button> {% endcomment %}
+                                {% comment %} <a href="{% url 'postjob' %}">Post Job</a>
+
+                            </div> {% endcomment %}
+                            <div class="m-t-20 text-center">
+                                <button id="postjob" class="btn btn-primary submit-btn">Post Job</button>
                             </div>
+                            </div>
+                            
                         </form>
-
-                        {% comment %} {% if messages %}
-                        <div class="messages">
-                        {% for message in messages %}
-                        <div class="message">{{ message }}</div>
-                        {% endfor %}
-                        </div>
-                        {% endif %} {% endcomment %}
-
                     </div>
                 </div>
+            </div>
+        </div>
+        
             </div>
             
         </div>
@@ -210,6 +258,32 @@
                 cnameError.textContent = "";
             }
         } {% endcomment %}
+        let bulletPointsEnabled = false;
+
+        function toggleBulletPoints() {
+            bulletPointsEnabled = !bulletPointsEnabled;
+            const jobDescriptionField = document.getElementById('job_description');
+            if (!bulletPointsEnabled) {
+                jobDescriptionField.value = jobDescriptionField.value.replace(/• /g, '');
+            }
+        }
+    
+        function handleEnter(event) {
+            if (bulletPointsEnabled && event.key === "Enter") {
+                event.preventDefault();
+                const jobDescriptionField = document.getElementById('job_description');
+                const currentPosition = jobDescriptionField.selectionStart;
+                const text = jobDescriptionField.value;
+                const newText = text.slice(0, currentPosition) + '\n• ' + text.slice(currentPosition);
+                jobDescriptionField.value = newText;
+                jobDescriptionField.selectionStart = jobDescriptionField.selectionEnd = currentPosition + 3;
+            }
+        }
+    
+        const jobDescriptionField = document.getElementById('job_description');
+        jobDescriptionField.addEventListener('input', handleEnter);
+            
+      
         
         function validateJname() {
             var jname = document.getElementById("jname").value;

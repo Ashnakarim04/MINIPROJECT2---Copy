@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 
 <!-- doctors23:12-->
 <head>
@@ -46,7 +46,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> 
   </div> {% endcomment %}
   <header class="">
     <nav class="navbar navbar-expand-lg">
@@ -65,31 +65,19 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'aboutuser' %}">About Us</a>
             </li>
-            {% comment %} <li>
-              <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Others</a>
-            
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{% url 'cprofile' %}">Profile</a>
-                  <a class="dropdown-item" href="{% url 'loginn' %}">Jobs</a>
-                  <a class="dropdown-item" href="{% url 'loginn' %}">Candidate List</a>
-                  
-              </div>
-            </li> {% endcomment %}
+           
             <li class="nav-item dropdown">
               {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'loggout' %}">Log Out</a>
-              {% else %}
-                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
-            
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{% url 'loginn' %}">Student</a>
-                  <a class="dropdown-item" href="{% url 'loginn' %}">Company</a>
-                  {% comment %} <a class="dropdown-item" href="{% url 'loginn' %}">College Officer</a> {% endcomment %}
-                  {% comment %} <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
-                  <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                  <a class="dropdown-item" href="terms.html">Terms</a> {% endcomment %}
-              </div>
-              {% endif %}
+              <a class="nav-link" href="{% url 'loggout' %}">Log Out</a>
+            {% else %}
+              <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
+          
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'loginn' %}">Student</a>
+                <a class="dropdown-item" href="{% url 'loginn' %}">Company</a>
+                <a class="dropdown-item" href="{% url 'loginn' %}">College Officer</a>
+            </div>
+            {% endif %}
             </li> 
             
             <li class="nav-item">
@@ -117,14 +105,29 @@
                             <a href="{%url 'postjob'%}"><i class="fa-solid fa-desktop"></i> <span>JOBS</span></a>
                         </li>
                         <li class>
-                          <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>APPLIED CANDIDATES</span></a>
+                          <a id="appstu"href="{%url 'appliedstudents'%}"><i class="fas fa-user"></i> <span>APPLIED CANDIDATES</span></a>
+                        </li>
+                        <li class>
+                          <a href="{%url 'cfirstround'%}"><i class="fas fa-user"></i> <span>SHORT LISTED CANDIDATES </span></a>
+                        </li>
+                        {% comment %} <li class>
+                          <a href="{%url 'appliedstudents'%}"><i class="fas fa-user"></i> <span>FIRST ROUND</span></a>
+                        </li>
+                        <li class>
+                          <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>SECOND ROUND</span></a>
+                        </li>
+                        <li class>
+                          <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>THIRD ROUND</span></a>
+                        </li>
+                        <li class>
+                          <a href="{%url 'postjob'%}"><i class="fas fa-user"></i> <span>FINAL ROUND</span></a>
                         </li>
                         <li class>
                           <a href="{%url 'postjob'%}"><i class="fas fa-user-check"></i> <span>CANDIDATE SHORT LIST</span></a>
                         </li>
                         <li class>
                           <a href="{%url 'postjob'%}"><i class="fa-solid fa-award fa-fade"></i></i> <span>SELECTED CANDIDATES</span></a>
-                        </li>
+                        </li> {% endcomment %}
                         
                     </ul>
                 </div>
@@ -134,95 +137,52 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">JOBS</h4>
+                        <h4 class="page-title" id="jobtest">JOBS</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{% url 'addjob' %}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Job</a>
+                        <a href="{% url 'addjob' %}" class="btn btn-primary btn-rounded float-right" id="jobadd"><i class="fa fa-plus"></i> Add Job</a>
                       </div>
                 </div>
               </div>
           </div>
- <!-- Your existing HTML code -->
 
- {% comment %} <div class="row">
-    {% for jobs in job %}
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ jobs.jname }}</h5>
-                <p class="card-text">COMPANY : {{ jobs.cname }}</p>
-                <p class="card-text">EMAIL : {{ jobs.email }}</p>
-                <p class="card-text">SALARY : {{ jobs.salary }}</p>
-                <p class="card-text">APPLICATION START DATE : {{ jobs.sdate }}</p>
-                <p class="card-text">APPLICATION END DATE : {{ jobs.edate }}</p>
-                <p class="card-text">WEBSITE : {{ jobs.link }}</p>
-                {% comment %} <p claAss="card-text">Gender: {{ ashaworker.get_gender_display }}</p> {% endcomment %}
-{% comment %}               
-                
-            </div>
-            <div class="btn-group">
-              <a href="{% url 'edit_job' job_id=jobs.id %}" class="btn btn-primary">Edit</a>   
-              <form method="POST" action="{% url 'delete_job' job_id=jobs.id %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-                      </div>
-        </div>
-       
-    </div>
-    {% endfor %}
-    
-</div>  {% endcomment %}
-
-{% comment %} <div class="row">
-  {% for jobs in job %}
-  <div class="col-md-4">
-      <div class="card">
-          <div class="card-body"> 
-              <h5 class="card-title">{{ jobs.jname }}</h5>
-              <p class="card-text">COMPANY: {{ jobs.cname }}</p>
-              <p class="card-text">EMAIL: {{ jobs.email }}</p>
-              <p class="card-text">SALARY: {{ jobs.salary }}</p>
-              <p class="card-text">APPLICATION START DATE: {{ jobs.sdate }}</p>
-              <p class="card-text">APPLICATION END DATE: {{ jobs.edate }}</p>
-              <p class="card-text">WEBSITE: {{ jobs.link }}</p>
-          </div>
-          <div class="btn-group">
-              <a href="{% url 'edit_job' job_id=jobs.id %}" class="btn btn-primary">Edit</a>
-              <form method="POST" action="{% url 'delete_job' job_id=jobs.id %}">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-danger">Delete</button>
-              </form>
-          </div>
-      </div>
-  </div>
-  {% endfor %}
-</div> {% endcomment %}
-
-<div class="row">
-  {% for jobs in job %}
-  {% if jobs.is_active %}
+ 
+<div class="row"> 
+  
+  {% for obj in job %} 
+  {% if obj.is_active %}
   <div class="col-md-4 custom-card">
+    
       <div class="card">
           <div class="card-body"> 
-              <b><h5 class="card-title">{{ jobs.jname }}</h5></b>
-              <p class="card-text">COMPANY: {{ jobs.cname }}</p>
-              <p class="card-text">EMAIL: {{ jobs.email }}</p>
-              <p class="card-text">SALARY: {{ jobs.salary }}</p>
-              <p class="card-text">APPLICATION START DATE: {{ jobs.sdate }}</p>
-              <p class="card-text">APPLICATION END DATE: {{ jobs.edate }}</p>
-              <p class="card-text">WEBSITE: {{ jobs.link }}</p>
-              <p class="card-text" id="criteriaText">CRITERIA : {{ jobs.criteria }}</p>
+              <h5 class="card-title"><b>{{ obj.cname }} - {{ obj.jname }} </b></h5></b>
+              {% comment %} <p class="card-text"> {{ jobs.cname }}</p> {% endcomment %}
+              <p class="card-text"><b>JOB :</b><br> {{ obj.job_descriptions }}</p>
+              <p class="card-text"><b>RESPONSIBILITIES :</b><br> {{ obj.responsibilities }}</p>
+              <p class="card-text"><b>PREFERRED SKILLS :</b><br> {{ obj.preferred_skills }}</p>
+              <p class="card-text"><b>ELIGIBILITY :</b><br> {{ obj.qualifications }}</p>
+              <h6 class="card-text"><b>TENTH  CGPA :</b>{{ obj.required_tenth_cgpa }}</h6>
+              <h6 class="card-text"><b>TWELFTH CGPA :</b>{{ obj.required_twelfth_cgpa }}</h6>
+              <h6 class="card-text"><b>CURRENT CGPA :</b>{{ obj.required_current_cgpa }}</h6>
+              <h6 class="card-text"><b>BACKLOGS :</b>{{ obj.required_backlog }}</h6>
+              <p class="card-text"><b>EMAIL :</b> {{ obj.email }}</p>
+              <p class="card-text"><b>SALARY : </b>{{ obj.salary }}</p>
+              <p class="card-text"><b>APPLICATION START DATE:</b> {{ obj.sdate }}</p>
+              <p class="card-text"><b>APPLICATION END DATE:</b> {{ obj.edate }}</p>
+              
+              <p class="card-text"><b>For more visit, </b>{{ obj.link }}</p>
+              {% comment %} <p class="card-text"><b>WEBSITE: </b>{{ jobs.link }}</p> {% endcomment %}
+              {% comment %} <p class="card-text" id="criteriaText">CRITERIA : {{ jobs.criteria }}</p> {% endcomment %}
 
               <!-- Button group with equal width and blue color -->
-              <div class="btn-group d-flex justify-content-between" style="width: 50%;">
+              {% comment %} <div class="btn-group d-flex justify-content-between" style="width: 50%;">
                   <a href="{% url 'download_criteria' job_id=jobs.id %}" class="btn btn-primary"></i>Download Criteria</a>
-              </div>
+              </div> {% endcomment %}
 
               <!-- Button group for Edit and Delete -->
               <div class="btn-group mt-2" style="width: 50%; display: flex; flex-direction: column;">
-                <a href="{% url 'edit_job' job_id=jobs.id %}" class="btn btn-primary btn-block" style="height: 100%;">Edit</a>
-                <form method="POST" action="{% url 'delete_job' job_id=jobs.id %}" class="btn-block" style="height: 100%;">
+                <a href="{% url 'edit_job' job_id=obj.id %}" class="btn btn-primary btn-block" style="height: 100%;">Edit</a>
+                <form method="POST" action="{% url 'delete_job' job_id=obj.id %}" class="btn-block" style="height: 100%;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-block" style="height: 100%;">Delete</button>
                 </form>
