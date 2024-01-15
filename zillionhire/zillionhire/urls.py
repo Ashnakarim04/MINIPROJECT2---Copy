@@ -29,6 +29,7 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.socialaccount.urls')),
     # path('', sample, name=''),
     path('',views.index, name="index"),
     path('jobs',views.jobs, name="jobs"),
